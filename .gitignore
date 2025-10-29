@@ -1,0 +1,21 @@
+# Ignore Python virtual environments
+venv/
+.env/
+ENV/
+env/
+
+# Ignore environment variables file
+fmp.env
+
+# Ignore output or generated folders
+outputs/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignore IDE and system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
