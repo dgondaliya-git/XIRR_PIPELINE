@@ -12,6 +12,12 @@ from core.manual_config import get_splits_from_manual_config
 from core.xirr_calc import xirr
 
 
+from core.compare_with_niftybees import Nifty_Bees_XIRR
+
+# from portfolio_analyzer.portfolio_analyzer import PortfolioAnalyzer
+from portfolio_analyzer.run_analysis import run_full_analysis
+
+
 def main():
     """Main execution function."""
     print("=" * 60)
@@ -99,12 +105,22 @@ def main():
     print("\nFetching current prices (FMP → yfinance → manual config)...")
     portfolio_with_prices = current_portfolio.groupby('Symbol')['CurrentQuantity'].sum().reset_index()
 
+    # symbols = portfolio_with_prices['Symbol'].unique()
+
+    # prices = []
+    # for idx, symbol in enumerate(portfolio_with_prices['Symbol'], 1):
+    #     print(f"  [{idx}/{len(portfolio_with_prices)}] Fetching {symbol}...")
+    #     price = get_current_price(symbol, date=end_date, verbose=False)
+    #     print(f"{price}???????")
+    #     prices.append(price)
+
     symbols = portfolio_with_prices['Symbol'].unique()
 
     prices = []
-    for idx, symbol in enumerate(portfolio_with_prices['Symbol'], 1):
-        print(f"  [{idx}/{len(portfolio_with_prices)}] Fetching {symbol}...")
+    for idx, symbol in enumerate(symbols, 1):
+        print(f"  [{idx}/{len(symbols)}] Fetching {symbol}...")
         price = get_current_price(symbol, date=end_date, verbose=False)
+        # print(f"→ Price: ₹{price}")
         prices.append(price)
 
     portfolio_with_prices['Current_Price'] = prices
@@ -253,10 +269,32 @@ def main():
     print("  • outputs/XIRR_result.csv - Return calculations")
     if manual_attention_needed:
         print("  • outputs/stocks_needing_manual_attention.csv - Issues to resolve")
+    
+    # current_portfolio = pd.read_csv("outputs/current_portfolio.csv")
+    # ETF symbol you want to process (example: 'NIFTYBEES')
+    etf_symbol = "NIFTYBEES"
 
+    # Create the XIRR calculator object
+    xirr_calc = Nifty_Bees_XIRR(file_path, etf=etf_symbol, verbose=True)
+
+    # Run the XIRR calculation
+    xirr_value = xirr_calc.calculate_xirr()
+
+    # Print result
+    if xirr_value is not None:
+        print(f"\nFinal {etf_symbol} XIRR: {xirr_value * 100:.2f}%")
+    else:
+        print(f"\nNo valid cash flows found for {etf_symbol}.")
+    
+    results, summary = run_full_analysis(current_portfolio)
+    print("portfolio analyzer executed successfully.\n") 
+    dic = {'Symbol':'NIFTYBEES', 'CurrentQuantity':1}
+    df = pd.DataFrame([dic])
+    results1, summary1 = run_full_analysis(df)
+    print("portfolio analyzer executed successfully for NIFTYBEES.\n") 
+    
 
 if __name__ == "__main__":
     main()
-
 
 

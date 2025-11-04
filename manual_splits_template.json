@@ -1,0 +1,30 @@
+{
+    "_instructions": {
+        "format": "Add your stock splits below",
+        "date_format": "YYYY-MM-DD",
+        "ratio_calculation": "numerator/denominator = split ratio (e.g., 10/1 = 10x)",
+        "example": "A 10:1 split means 1 old share becomes 10 new shares"
+    },
+    "EXAMPLE": [
+        {
+            "date": "2024-01-15",
+            "numerator": 10,
+            "denominator": 1,
+            "note": "10:1 stock split - 1 share becomes 10"
+        },
+        {
+            "date": "2023-06-20",
+            "numerator": 5,
+            "denominator": 1,
+            "note": "5:1 stock split - 1 share becomes 5"
+        }
+    ],
+    "RELIANCE": [
+        {
+            "date": "2017-09-29",
+            "numerator": 1,
+            "denominator": 1,
+            "note": "Example: Add actual splits here if missing from APIs"
+        }
+    ]
+}

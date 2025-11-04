@@ -17,7 +17,7 @@ def get_current_price(symbol, date=None, verbose=True):
     Fetch stock closing price with fallback: FMP → yfinance → manual config.
     Returns float price (₹) or 0.0 if all sources fail.
     """
-
+    # print(f"Price of {symbol} on {date}!!!!!!!!!!!!!!")
     if verbose:
         logger.info(f"Requesting price for {symbol}, date: {date}")
 

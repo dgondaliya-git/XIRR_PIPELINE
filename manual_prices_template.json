@@ -1,0 +1,18 @@
+{
+    "_instructions": {
+        "format": "Add your stock prices below",
+        "date_format": "YYYY-MM-DD",
+        "usage": "If API fails to fetch price, manually add it here",
+        "example": "Price will be used when date matches or as fallback"
+    },
+    "EXAMPLE": {
+        "price": 1500.5,
+        "date": "2024-10-28",
+        "note": "Example manual price entry"
+    },
+    "RELIANCE": {
+        "price": 2450.75,
+        "date": "2024-10-28",
+        "note": "Add actual price if APIs fail"
+    }
+}
